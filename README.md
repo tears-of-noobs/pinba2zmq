@@ -17,21 +17,21 @@ First of all you need to install ProtoBuf from http://code.google.com/p/protobuf
 After that you need just clone repo:
 
 ``` shell
-git clone https://github.com/aryoh/pinba2zmq.git
-cd pinba2zmq
+git clone https://github.com/tears-of-noobs/pinba2zmq.git
+cd pinba2zmq && git checkout zmq_3_2
 python setup.py install
 ```
 
-Now, if you want pinba2zmq to start with your server (if you on Ubuntu):
+Now, if you want pinba2zmq to start with your server (if you have Linux with systemd):
 
 ``` shell
-sudo chmod +x /etc/init.d/pinba2zmq && sudo update-rc.d pinba2zmq defaults
+systemctl enable pinba2zmq
 ```
 
 And to start:
 
 ``` shell
-sudo service pinba2zmq start
+systemctl start pinba2zmq
 ```
 
 Command line arguments
@@ -76,7 +76,7 @@ All time values is in microseconds.
 
 Dependencies
 ------
-gevent, pyzmq, gevent_zmq, protobuf, simplejson
+gevent, pyzmq, gevent_zmq, protobuf, ujson, python2-protobuf
 
 + http://www.gevent.org/
 + http://www.zeromq.org/bindings:python
