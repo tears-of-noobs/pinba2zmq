@@ -37,7 +37,7 @@ import ujson
 from gevent_zeromq import zmq
 
 # protobuf message
-from Pinba import Request
+from pinba_pb2 import Request
 from dgramserver import DgramServer
 
 logger = logging.getLogger("pinba")
@@ -101,8 +101,11 @@ class Decoder(multiprocessing.Process):
 
         pub = context.socket(zmq.PUB)
         pub.bind(self.out_addr)
-        pub.setsockopt(zmq.HWM, 1)
-        pub.setsockopt(zmq.SWAP, 512 * 1024 * 1024)
+        try:
+            pub.setsockopt(zmq.HWM, 1)
+        except AttributeError:
+            pub.setsockopt(zmq.SNDHWM, 1)
+            pub.setsockopt(zmq.RCVHWM, 1)
 
         logger.info("%s ready" % multiprocessing.current_process().name)
         try:
