@@ -40,15 +40,7 @@ setup(
     install_requires=['gevent', 'ujson', 'gevent_zeromq'],
     include_package_data=True,
     zip_safe=False,
-    ext_modules=[
-        Extension(
-            "Pinba",
-            ["pinba_pb/pinba.cc", "pinba_pb/pinba.pb.cc"],
-            libraries=['protobuf'],
-            include_dirs=['pinba_pb']
-        )
-    ],
     test_suite="test.suite",
-    data_files=[('/etc/init.d', ['init.d/pinba2zmq'])],
+    data_files=[('/etc/systemd/system', ['systemd/pinba2zmq.service'])],
     entry_points={'console_scripts': ['pinba2zmq = pinba2zmq.pinba2zmq:main']}
 )

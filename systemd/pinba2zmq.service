@@ -1,0 +1,11 @@
+[Unit]
+Description=Daemon for collection pinba stats and sending it to ZeroMQ socket
+After=syslog.target network.target local-fs.target
+
+[Service]
+User=root
+Group=root
+
+
+ExecStart=/usr/bin/pinba2zmq
+Restart=on-abort
